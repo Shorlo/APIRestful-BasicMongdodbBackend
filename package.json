@@ -1,0 +1,19 @@
+{
+  "name": "apirestful-basicmongdodbbackend",
+  "version": "1.0.0",
+  "description": "Basic project for a backedn with nodejs mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shorlo/APIRestful-BasicMongdodbBackend.git"
+  },
+  "author": "Javier Sainz de Baranda Goñi",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Shorlo/APIRestful-BasicMongdodbBackend/issues"
+  },
+  "homepage": "https://github.com/Shorlo/APIRestful-BasicMongdodbBackend#readme"
+}
