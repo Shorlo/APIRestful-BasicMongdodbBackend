@@ -26,14 +26,19 @@
 
 // Dependencies
 const mongoose = require('mongoose');
+const app = require('./app');
+const PORT = 3900;
 
 // MongoDB connection
 mongoose.connect('mongodb://0.0.0.0:27017/ApiRestful_BasicMongodbBackend').then(() =>
 {
     console.log('Database connected successfuly.');
+    app.listen(PORT, () =>
+    {
+        console.log(`Server running in PORT: ${PORT}`);
+    });
 }).catch((error) =>
 {
     console.error(error);
     throw new Error('Database connection failed.');
 });
-

@@ -23,3 +23,30 @@
 '==============================================================================*/
 
 'use strict'
+
+// Dependencies
+const express = require('express');
+const bodyParser = require('body-parser');
+
+// Start express server
+const app = express();
+
+// Load routes
+
+// Body-parser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+// Config CORS
+
+// Routes
+app.get('/checkapi', (request, response) =>
+{
+    response.status(200).send
+    ({
+        status: 'Success',
+        message: 'Checked basic api restful with mongodb.'
+    });
+});
+
+module.exports = app;
