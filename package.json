@@ -4,7 +4,8 @@
   "description": "Basic project for a backedn with nodejs mongodb",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Shorlo/APIRestful-BasicMongdodbBackend/issues"
   },
-  "homepage": "https://github.com/Shorlo/APIRestful-BasicMongdodbBackend#readme"
+  "homepage": "https://github.com/Shorlo/APIRestful-BasicMongdodbBackend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
