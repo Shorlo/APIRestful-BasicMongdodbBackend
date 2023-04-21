@@ -195,5 +195,34 @@ function updateFruit(request, response)
     });
 }
 
+function deleteFruit(request, response)
+{
+    const fruitId = request.params.id;
 
-module.exports = { test, saveFruit, getFruits, getFruitsOrderById, getOneFruit, updateFruit }
+    Fruit.findByIdAndDelete(fruitId).then((fruitDeleted) =>
+    {
+        if(!fruitDeleted || fruitDeleted.length <= 0)
+        {
+            return response.status(404).send
+            ({
+                status:'Error',
+                message: 'Fruit to delete not found.'
+            });
+        }
+        return response.status(200).send
+        ({
+            status:'Success',
+            message: 'Fruit was deleted successfuly.',
+            fruit: fruitDeleted
+        });
+    }).catch(() =>
+    {
+        return response.status(500).send
+        ({
+            status:'Error',
+            message: 'Error deleting fruit.'
+        });
+    })
+}
+
+module.exports = { test, saveFruit, getFruits, getFruitsOrderById, getOneFruit, updateFruit, deleteFruit }

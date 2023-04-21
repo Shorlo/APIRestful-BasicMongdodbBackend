@@ -34,5 +34,6 @@ router.get('/getFruits', FruitController.getFruits);
 router.get('/getFruitsOrderById', FruitController.getFruitsOrderById);
 router.get('/getOneFruit/:id', FruitController.getOneFruit);
 router.put('/updateFruit/:id', FruitController.updateFruit);
+router.delete('/deleteFruit/:id', FruitController.deleteFruit);
 
 module.exports = router;
