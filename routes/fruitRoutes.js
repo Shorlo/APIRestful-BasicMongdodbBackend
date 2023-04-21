@@ -33,4 +33,6 @@ router.post('/saveFruit', FruitController.saveFruit);
 router.get('/getFruits', FruitController.getFruits);
 router.get('/getFruitsOrderById', FruitController.getFruitsOrderById);
 router.get('/getOneFruit/:id', FruitController.getOneFruit);
+router.put('/updateFruit/:id', FruitController.updateFruit);
+
 module.exports = router;

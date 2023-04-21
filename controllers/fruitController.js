@@ -165,4 +165,35 @@ function getOneFruit(request, response)
     });
 }
 
-module.exports = { test, saveFruit, getFruits, getFruitsOrderById, getOneFruit }
+function updateFruit(request, response)
+{
+    const fruitId = request.params.id;
+    const data = request.body;
+
+    Fruit.findByIdAndUpdate(fruitId, data, {new: true}).then((fruitUpdated) =>
+    {
+        if(!fruitUpdated || fruitUpdated.length <= 0)
+        {
+            return response.status(404).send
+            ({
+                status:'Error',
+                message: 'No data to update found.'
+            });
+        }
+        return response.status(200).send
+        ({
+            status:'Success',
+            fruit: fruitUpdated
+        });
+    }).catch(() =>
+    {
+        return response.status(500).send
+        ({
+            status:'Error',
+            message: 'Error updating fruit.'
+        });
+    });
+}
+
+
+module.exports = { test, saveFruit, getFruits, getFruitsOrderById, getOneFruit, updateFruit }
