@@ -136,4 +136,33 @@ function getFruitsOrderById(request, response)
     });
 }
 
-module.exports = { test, saveFruit, getFruits, getFruitsOrderById }
+function getOneFruit(request, response)
+{
+    const fruitId = request.params.id;
+
+    Fruit.findById(fruitId).then((fruit) =>
+    {
+        if(!fruit || fruit.length <= 0)
+        {
+            return response.status(404).send
+            ({
+                status:'Error',
+                message: 'Fruit not found in database.'
+            });
+        }
+        return response.status(200).send
+        ({
+            status:'Success',
+            fruit: fruit
+        });
+    }).catch(() =>
+    {
+        return response.status(500).send
+        ({
+            status:'Error',
+            message: 'Error getting fruit from database.'
+        });
+    });
+}
+
+module.exports = { test, saveFruit, getFruits, getFruitsOrderById, getOneFruit }
