@@ -30,5 +30,7 @@ const FruitController = require('../controllers/fruitController');
 
 router.get('/test', FruitController.test);
 router.post('/saveFruit', FruitController.saveFruit);
+router.get('/getFruits', FruitController.getFruits);
+router.get('/getFruitsOrderById', FruitController.getFruitsOrderById);
 
 module.exports = router;

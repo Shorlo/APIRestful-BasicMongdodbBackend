@@ -82,4 +82,58 @@ function saveFruit(request, response)
     });
 }
 
-module.exports = { test, saveFruit }
+function getFruits(request, response)
+{
+    Fruit.find({}).then((fruits) =>
+    {
+        if(!fruits || fruits.length <= 0)
+        {
+            return response.status(404).send
+            ({
+                status:'Error',
+                message: 'Fruits not found in database.'
+            });
+        }
+        return response.status(200).send
+        ({
+            status:'Success',
+            fruits
+        });
+    }).catch(() =>
+    {
+        return response.status(500).send
+        ({
+            status:'Error',
+            message: 'Error getting fruits from database.'
+        });
+    });
+}
+
+function getFruitsOrderById(request, response)
+{
+    Fruit.find({}).sort({'_id': -1}).then((fruits) =>
+    {
+        if(!fruits || fruits.length <= 0)
+        {
+            return response.status(404).send
+            ({
+                status:'Error',
+                message: 'Fruits not found in database.'
+            });
+        }
+        return response.status(200).send
+        ({
+            status:'Success',
+            fruits
+        });
+    }).catch(() =>
+    {
+        return response.status(500).send
+        ({
+            status:'Error',
+            message: 'Error getting fruits from database.'
+        });
+    });
+}
+
+module.exports = { test, saveFruit, getFruits, getFruitsOrderById }
