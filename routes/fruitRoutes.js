@@ -1,4 +1,4 @@
-/*  APIRESTFUL-BASICMONGODBBACKEND/app.js
+/*  APIRESTFUL-BASICMONGODBBACKEND/routes/fruitRoutes.js
        ____     __           _           _____        __
       / __/_ __/ /  ___ ____(_)__  ___  / ___/__  ___/ /__
  ___ _\ \/ // / _ \/ -_) __/ / _ `/ _ \/ /__/ _ \/ _  / -_)_____________________
@@ -24,32 +24,11 @@
 
 'use strict'
 
-// Dependencies
 const express = require('express');
-const bodyParser = require('body-parser');
+const router = express.Router();
+const FruitController = require('../controllers/fruitController');
 
-// Start express server
-const app = express();
+router.get('/test', FruitController.test);
+router.post('/saveFruit', FruitController.saveFruit);
 
-// Load routes
-const FruitRoutes = require('./routes/fruitRoutes');
-
-// Body-parser
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-// Config CORS
-
-// Routes
-app.get('/checkapi', (request, response) =>
-{
-    response.status(200).send
-    ({
-        status: 'Success',
-        message: 'Checked basic api restful with mongodb.'
-    });
-});
-
-app.use('/api/fruit', FruitRoutes);
-
-module.exports = app;
+module.exports = router;

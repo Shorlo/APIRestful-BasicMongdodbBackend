@@ -1,4 +1,4 @@
-/*  APIRESTFUL-BASICMONGODBBACKEND/app.js
+/*  APIRESTFUL-BASICMONGODBBACKEND/controllers/fruitController.js
        ____     __           _           _____        __
       / __/_ __/ /  ___ ____(_)__  ___  / ___/__  ___/ /__
  ___ _\ \/ // / _ \/ -_) __/ / _ `/ _ \/ /__/ _ \/ _  / -_)_____________________
@@ -24,32 +24,62 @@
 
 'use strict'
 
-// Dependencies
-const express = require('express');
-const bodyParser = require('body-parser');
+const Fruit = require('../models/Fruit');
 
-// Start express server
-const app = express();
-
-// Load routes
-const FruitRoutes = require('./routes/fruitRoutes');
-
-// Body-parser
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-// Config CORS
-
-// Routes
-app.get('/checkapi', (request, response) =>
+function test(request, response)
 {
     response.status(200).send
     ({
         status: 'Success',
         message: 'Checked basic api restful with mongodb.'
     });
-});
+}
 
-app.use('/api/fruit', FruitRoutes);
+function saveFruit(request, response)
+{
+    const fruit = new Fruit();
 
-module.exports = app;
+    const params = request.body;
+
+    if(params.name)
+    {
+        fruit.name = params.name;
+        fruit.color = params.color;
+        fruit.season = params.season;
+    }
+    else
+    {
+        return response.status(404).send
+        ({
+            status:'Error',
+            message: 'Missing data.',
+        });
+    }
+
+    fruit.save().then((fruitStored) => 
+    {
+        if(!fruitStored || fruitStored.length <= 0)
+        {
+            return response.status(404).send
+            ({
+                status:'Error',
+                message: 'Fruit to save not found.'
+            });
+        }
+        return response.status(200).send
+        ({
+            status:'Success',
+            message: 'Fruit save in database successfuly.',
+            fruit: fruitStored
+        });
+    }).catch(() =>
+    {
+        return response.status(500).send
+        ({
+            status:'Error',
+            message: 'Error saving fruit in database.'
+        });
+    });
+}
+
+module.exports = { test, saveFruit }
